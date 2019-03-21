@@ -7,8 +7,26 @@ class App extends Component {
 
   state = STORE;
 
-  deleteCard(id) {
+  deleteCard = id => {
     console.log(`delete card with id ${id} called`);
+    console.log(this.state);
+    const {allCards, lists} = this.state;
+    console.log(allCards, lists);
+    
+    const newLists = lists.map(function(ele) {
+      return {
+        cardIds: ele.cardIds.filter(el => el !== id),
+        header: ele.header,
+        id: ele.id
+      }
+    });
+    
+    delete allCards[id];
+    this.setState({
+      allCards: allCards,
+      lists: newLists
+    });
+
   }
 
   addCard = (listId) => {
