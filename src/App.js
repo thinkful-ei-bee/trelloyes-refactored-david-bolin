@@ -8,11 +8,11 @@ class App extends Component {
   state = STORE;
 
   deleteCard(id) {
-    console.log('delete card with id {id} called');
+    console.log(`delete card with id ${id} called`);
   }
 
   addCard(listId) {
-    console.log('add card to list {listId} called');
+    console.log(`add card to list ${listId} called`);
   }
 
   render() {
@@ -26,9 +26,10 @@ class App extends Component {
           {store.lists.map(list => (
             <List
               key={list.id}
+              passedKey={list.id}
               header={list.header}
               cards={list.cardIds.map(id => store.allCards[id])} 
-              delete={this.deleteCard}
+              deleteIt={this.deleteCard}
               add={this.addCard}
             />
           ))}
