@@ -11,8 +11,34 @@ class App extends Component {
     console.log(`delete card with id ${id} called`);
   }
 
-  addCard(listId) {
+  addCard = (listId) => {
     console.log(`add card to list ${listId} called`);
+    const newId = Math.random().toString(36).substring(2, 4)
+    + Math.random().toString(36).substring(2, 4);
+    const newCard = {
+      id: newId,
+      title: `Random Card ${newId}`,
+      content: 'lorem ipsum'
+    };
+    const newAll = {...this.state.allCards};
+    newAll[newId] = newCard;
+
+    const cardIds = [...this.state.lists[listId - 1].cardIds, newId];
+    const newObj = {
+      cardIds: cardIds,
+      header: this.state.lists[listId -1].header,
+      id: listId
+    };
+  
+    let newLists = this.state.lists.slice(0, listId - 1);
+    newLists.push(newObj);
+    newLists = newLists.concat(this.state.lists.slice(listId));
+    
+    this.setState({
+      allCards: newAll,
+      lists: newLists
+    });
+    
   }
 
   render() {
