@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import List from './List'
 import './App.css';
+import STORE from './STORE'
 
 class App extends Component {
-  static defaultProps = {
-    store: {
-      lists: [],
-      allCards: {},
-    }
-  };
+
+  state = STORE;
 
   render() {
-    const { store } = this.props
+    const store = this.state;
     return (
       <main className='App'>
         <header className='App-header'>
